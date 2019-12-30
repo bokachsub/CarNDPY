@@ -76,6 +76,7 @@ In my pipeline I am performing Sobel threshold in X direction via `abs_sobel_thr
 For image transform I have a separate class inside `image_transform.py`. Class constructor accepts shape of the image, as well as source and distination points. It has 2 functions to warp and unward images: `get_warp_image` and `get_unwarp_image`. Both of them use `cv2.warpPerspective` function with `cv2.INTER_LINEAR` flag for image transformation. 
 
 For source and destination points I took the undistored image and selected the following points: 
+
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
 | (274, 689)    | (274, 689)    | 
@@ -120,7 +121,7 @@ return (left_curv_m + right_curv_m)/2
 I implemented `get_distance_from_center()` in the same class. I am locating `distance_between_lines` and `center_point_between_lines`. Then using `xm_per_pix` value I am performing distance off center calculation: 
 ```pytond
 current_width = self.shape[0]
-offset_from_windshield = 0
+offset_from_windshield = 70
 distance_between_lines = self.right_fitx_points[current_width -1 - offset_from_windshield] - self.left_fitx_points[current_width -1 -offset_from_windshield]
 center_point_between_lines = self.left_fitx_points[current_width -1 -offset_from_windshield] + distance_between_lines/2
 distance_off_center_in_meters = (center_point_between_lines - (current_width/2) ) * self.xm_per_pix
